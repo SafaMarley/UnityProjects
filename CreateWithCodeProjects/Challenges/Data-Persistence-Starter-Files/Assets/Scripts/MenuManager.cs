@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,13 +9,7 @@ public class MenuManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        LoadData();
     }
 
     public void StartButtonClicked()
@@ -40,6 +35,19 @@ public class MenuManager : MonoBehaviour
         else
         {
             DataPersistence.Instance.trierName = playerName;
+        }
+    }
+
+    public void LoadData()
+    {
+        string path = Application.persistentDataPath + "/savefile.json";
+        if (File.Exists(path))
+        {
+            string json = File.ReadAllText(path);
+            MainManager.SaveData data = JsonUtility.FromJson<MainManager.SaveData>(json);
+
+            DataPersistence.Instance.name = data.bestScorersName;
+            DataPersistence.Instance.bestScore = data.bestScore;
         }
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -27,7 +28,6 @@ public class MainManager : MonoBehaviour
         {
             BestScoreText.text = "Best Score:" + DataPersistence.Instance.name + ":" + DataPersistence.Instance.bestScore;
         }
-        Debug.Log("sealam");
         const float step = 0.6f;
         int perLine = Mathf.FloorToInt(4.0f / step);
         
@@ -92,5 +92,23 @@ public class MainManager : MonoBehaviour
             DataPersistence.Instance.name = DataPersistence.Instance.trierName;
         }
         BestScoreText.text ="Best Score:" + DataPersistence.Instance.name + ":" + DataPersistence.Instance.bestScore;
+        SaveScorer();
+    }
+
+    [System.Serializable]
+    public class SaveData
+    {
+        public string bestScorersName;
+        public int bestScore;
+    }
+
+    public void SaveScorer()
+    {
+        SaveData data = new SaveData();
+        data.bestScorersName = DataPersistence.Instance.name;
+        data.bestScore = DataPersistence.Instance.bestScore;
+
+        string json = JsonUtility.ToJson(data);
+        File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
     }
 }
