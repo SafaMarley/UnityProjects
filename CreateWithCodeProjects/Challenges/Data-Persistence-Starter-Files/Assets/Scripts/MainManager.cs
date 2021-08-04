@@ -11,6 +11,7 @@ public class MainManager : MonoBehaviour
     public Rigidbody Ball;
 
     public Text ScoreText;
+    public Text BestScoreText;
     public GameObject GameOverText;
     
     private bool m_Started = false;
@@ -22,6 +23,11 @@ public class MainManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (DataPersistence.Instance.bestScore != 0)
+        {
+            BestScoreText.text = "Best Score:" + DataPersistence.Instance.name + ":" + DataPersistence.Instance.bestScore;
+        }
+        Debug.Log("sealam");
         const float step = 0.6f;
         int perLine = Mathf.FloorToInt(4.0f / step);
         
@@ -70,7 +76,21 @@ public class MainManager : MonoBehaviour
 
     public void GameOver()
     {
+        if (m_Points > DataPersistence.Instance.bestScore)
+        {
+            BestScorer(m_Points);
+        }
         m_GameOver = true;
         GameOverText.SetActive(true);
+    }
+
+    public void BestScorer(int score)
+    {
+        DataPersistence.Instance.bestScore = score;
+        if (DataPersistence.Instance.trierName != "")
+        {
+            DataPersistence.Instance.name = DataPersistence.Instance.trierName;
+        }
+        BestScoreText.text ="Best Score:" + DataPersistence.Instance.name + ":" + DataPersistence.Instance.bestScore;
     }
 }
