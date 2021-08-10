@@ -6,7 +6,7 @@ public class SpawnManager : MonoBehaviour
 {
     public GameObject[] unitArray;
 
-    //Encapsulation
+    //Demonstration of Encapsulation
     private float spawnRangeZ = 7f;
     private float spawnPointZ;
     private float spawnRangeX = 11f;
@@ -28,6 +28,7 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
+    //Demonstration of Abstraction
     private Vector3 GenerateRandomPosition()
     {
         if (Random.Range(0, 2) == 0)
@@ -44,6 +45,7 @@ public class SpawnManager : MonoBehaviour
         return randomPosition;
     }
 
+    //Demonstration of Abstraction
     private int GenerateRandomIndex()
     {
         int randomIndex = Random.Range(0, unitArray.Length);

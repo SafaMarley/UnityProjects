@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//Inheritance
+//Demonstration of Inheritance
 public class BasicUnit : EnemyUnits
 {
-    //Polymorphism
+    //Demonstration of Polymorphism
     public override void tellWhoYouAre()
     {
         Debug.Log("I am fast.");
