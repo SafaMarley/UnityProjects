@@ -20,6 +20,7 @@ public class EnemyUnits : MonoBehaviour
     {
         if (!isGameOver)
         {
+            tellWhoYouAre();
             player = GameObject.Find("Player");
             playerScript = player.GetComponent<Player>();
             enemyRb = GetComponent<Rigidbody>();
@@ -68,5 +69,9 @@ public class EnemyUnits : MonoBehaviour
         isGameOver = true;
         player.gameObject.SetActive(false);
         Debug.Log("you lost");
+    }
+    
+    public virtual void tellWhoYouAre()
+    {
     }
 }

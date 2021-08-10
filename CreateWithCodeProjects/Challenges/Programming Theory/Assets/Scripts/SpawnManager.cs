@@ -6,6 +6,7 @@ public class SpawnManager : MonoBehaviour
 {
     public GameObject[] unitArray;
 
+    //Encapsulation
     private float spawnRangeZ = 7f;
     private float spawnPointZ;
     private float spawnRangeX = 11f;
